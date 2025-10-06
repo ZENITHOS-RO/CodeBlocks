@@ -24,7 +24,7 @@ return function()
 			contents = { -- ROW:COLUMNS
 				[1] = {
 					[1] = {type = "label", position = "AUTO", text = "Set local variable"},
-					[2] = {type = "menu", position = "AUTO", options = function() local list = mod.api.getAllTypes(); table.insert(list, mod.api.getAllClassNames()); table.insert(list, "any"); return list end},
+					[2] = {type = "menu", position = "AUTO", options = function() local list = mod.api.getAllTypes(); table.insert(list, mod.api.getAllClassNames()); table.insert(list, "any"); return list end, selected = "any"},
 					[3] = {type = "label", position = "AUTO", text = "to"},
 					[4] = {type = "inbox", position = "AUTO", value = nil},
 					[5] = {type = "label", position = "AUTO", text = "as"},
@@ -33,7 +33,7 @@ return function()
 			}
 		},
 		
-		onAttemptUpdate = function(blockAttempting) -- For Validations / Automatic Features, ect.. (PS: This will only fire when a block is attempting to insert inside).
+		onAttemptUpdate = function(blockAttempting) -- For Pre-Validations (PS: This will only fire when a block is attempting to insert inside).
 			return true --Always return true if no pre-validation is required.
 		end,
 
