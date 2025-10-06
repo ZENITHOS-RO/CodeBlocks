@@ -41,7 +41,7 @@ return function()
 			local newBlockData = blockData
 			local Analysis = {}
 			
-			local className = blockData.row[1].columns[2].selected
+			local className = newBlockData.row[1].columns[2].selected
 			local c4Input = newBlockData.row[1].columns[4].input
 			if string.lower(className) == "string" and c4Input == nil and c4Input ~= mod.MODID..":types.string" then
 				newBlockData.row[1].columns[4].input = {mod.MODID..":types.string", ""}
@@ -53,25 +53,31 @@ return function()
 				newBlockData.row[1].columns[4].input = {mod.MODID..":types.table", {}}
 			end
 
+			local NameInput = newBlockData.row[1].columns[6].input
+			if not NameInput:match("^[a-zA-Z_][a-zA-Z0-9_]*$") then
+				table.insert(Analysis, {1, 4, "Invalid variable name format"}) -- ROW, COLUMN, REASONS
+			end
+
 			return {
 				updateBlockData = newBlockData,
-				Analysis = Analysis -- Similar to Roblox Built-in features
+				updateAnalysis = Analysis -- Similar to Roblox Built-in features
 			}
 		end,
 		
 		compile = function(blockData) -- Compile this Block to LUA
+			local varName = blockData.row[1].columns[6].input or "Var"
+			local selectedClass = blockData.row[1].columns[2].selected or "any"
+			local Value = blockData.row[1].columns[4].selected or nil
+
+			
 			--Can return either one string for one line (then skip line) or {string} as place-each-line.
 		end,
 		
 		convert = function(lineData) -- Convert LUA to (Code)Block
 			if lineData[1] ~= "local" then return nil end -- If doesn't match, return nil to let Processor continue asking another Block until it matches.
 		end,
-		
-		compact = function(blockData, to) -- Convert LUA to another Language (Cross-Language)
-			if to == "C++" then
-				-- Do not write anything here for now, this feature is still under planning.
-			end
-		end,
+
+		--Compact under rework
 	}
 
 	mod.api.registry.blocks:build(mod.MODID..":variables.local", block)
