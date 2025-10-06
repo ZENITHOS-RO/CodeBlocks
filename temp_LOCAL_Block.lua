@@ -39,6 +39,7 @@ return function()
 
 		onUpdate = function(blockData) -- For Validations / Automatic Features, ect.. (PS: This do not fire that is not Columns changes).
 			local newBlockData = blockData
+			local Analysis = {}
 			
 			local className = blockData.row[1].columns[2].selected
 			local c4Input = newBlockData.row[1].columns[4].input
@@ -52,7 +53,10 @@ return function()
 				newBlockData.row[1].columns[4].input = {mod.MODID..":types.table", {}}
 			end
 
-			return newBlockData
+			return {
+				updateBlockData = newBlockData,
+				Analysis = Analysis -- Similar to Roblox Built-in features
+			}
 		end,
 		
 		compile = function(blockData) -- Compile this Block to LUA
