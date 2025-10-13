@@ -20,8 +20,12 @@ return function()
 				can_stack_inside = false,
 				can_input = false,
 			},
+
+			floors = {
+				1,2
+			} --Can Stack must be enabled for this to work.
 			
-			contents = { -- ROW:COLUMNS
+			contents = { -- FLOOR:ROW:COLUMNS (If there's only 2 index, FLOOR index will be skipped.)
 				[1] = {
 					[1] = {type = "label", position = "AUTO", text = "Set local variable"},
 					[2] = {type = "menu", position = "AUTO", options = function() local list = mod.api.getAllTypes(); table.insert(list, mod.api.getAllClassNames()); table.insert(list, "any"); return list end, selected = "any"},
