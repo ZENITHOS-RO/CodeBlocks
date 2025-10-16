@@ -17,7 +17,7 @@ return function()
 			connections = {
 				allow_connection_above = true,
 				allow_connection_below = true,
-				can_stack_inside = false,
+				can_stack = false,
 				can_input = false,
 			},
 
