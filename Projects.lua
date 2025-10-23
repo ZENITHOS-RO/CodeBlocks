@@ -8,7 +8,7 @@ function this.loopThruRender (StartingInstance:Frame, CurrentIndex:string, Block
       --render
       if coldata["stack"] then
         for tabidx, tabdata in pairs(coldata["stack"] do
-          
+          this.loopThruRender()
         end
       end
   end
@@ -23,7 +23,7 @@ function export:loadProject (ProjectModule:ModuleScript)
   for groupidx, groupdata in pairs(pm.codes) do
     if not BlockData["position"] then return -2 end
     --call render for first Block
-
+    
   end
 end
 
