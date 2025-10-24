@@ -5,10 +5,10 @@ local current, progresses = 0, 0
 
 function this.loopThruRender (StartingInstance:Frame, CurrentIndex:string, BlockData:{})
   for colidx, coldata in pairs(BlockData) do
-      --call render
+      local block --call render
       if coldata["stack"] then
         for tabidx, tabdata in pairs(coldata["stack"]) do
-          this.loopThruRender()
+          this.loopThruRender(block, CurrentIndex..tostring(tabidx), tabdata)
         end
       end
   end
