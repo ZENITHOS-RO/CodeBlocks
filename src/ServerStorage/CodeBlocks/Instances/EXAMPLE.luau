@@ -11,7 +11,6 @@ return {
 						[2] = { value = nil },
 						[3] = { input = "var1" },
 					},
-					--[[
 					stack = {
 						[1] = { --1.1.FLOOR(1).COLUMN(1)
 							[1] = { --1.1.1.1
@@ -23,9 +22,8 @@ return {
 								},
 							},
 						}
-					} 
-					(won't be included if not stackable, to reduce ram space.)]]
-					
+					},
+
 					--analysis = {} (won't be included if no analysis is present, to reduce ram space.)
 				},
 			},
