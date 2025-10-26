@@ -20,8 +20,8 @@ function this.phraseBlockType (connections:{})
   end
 end
 
-function processor:render (BlockRenderData:{}, BlockData:{})
-  
+function export:render (To:Frame|{}, Index:number, Block:string, WithBlockData:{}?, Floor:number?)
+  return
 end
 
 return export
