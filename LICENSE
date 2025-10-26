@@ -7,20 +7,36 @@ PERMITTED TO DO/USE UNDER APPROPRIATE PURPOSE:
 - Use (Roblox) Codeblocks on Roblox Studio as a Plugin;
 - Integration of CB into your Roblox games;
 - Integration of CB into your Roblox plugins;
-- Integration of CB into any kind of software (including outside Roblox);
-- Modification and adaptation for your specific use cases;
+- Integration of CB into any kind of software (including outside Roblox); and
+- Modification and adaptation for your specific use cases.
 
 RESTRICTIONS:
-- REDISTRIBUTION: You may not distribute, share, or publish the original CB software;
-- RESELLING: You may not price, sell, or commercially distribute CB without prior written permission;
-- CLAIMING OWNERSHIP: You may not claim (ROBLOX) CB as your own original work;
+- REDISTRIBUTION: You may not distribute, share, or publish the original (Roblox) CodeBlocks plugin / software;
+- RESELLING: You may not price, sell, or commercially distribute CodeBlocks source without prior written permission; and
+- CLAIMING OWNERSHIP: You may not claim (ROBLOX) CODEBLOCKS as your own original work.
 
 ATTRIBUTION REQUIREMENT:
-You must include this copyright notice and license text in any project using CB.
+You must include this copyright notice and license text in any project using the source of (Roblox) CodeBlocks.
 
 RESERVATION OF RIGHTS:
 ZENITHOS reserves all rights not expressly granted in this license. 
-This license may be revoked for violation of terms.
+This license may be revoked or other action may be taken for violation of terms; including but not limited to
+    - Protect the Intellectual Property of (Roblox) CodeBlocks as a Plugin / Software;
+    - Issue takedown notices for unauthorized distributions;
+    - Pursue legal action for commercial infringement;
+    - Revoke access to future updates and support; and
+    - Blacklist violating projects from community resources.
+
+TERMINATION:
+This license automatically terminates if you violate any of its terms above.
+Upon termination, you must immediately cease all use of (Roblox) CodeBlocks source.
+
+GOVERNING LAW:
+This license shall be governed by the laws of HONG KONG (HKSAR) without regard to conflict of law principles.
+
+EXCEPTIONS:
+ZENITHOS hereby allowed the "CodeBlocks" IDE (Software) to continue using this name, unrestricted;
+To ensure their traditional name can remain - While the CodeBlocks Visual Code Editor will be a different things.
 
 DISCLAIMER:
 THIS SOFTWARE IS PROVIDED "AS-IS" WITHOUT WARRANTIES. 
