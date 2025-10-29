@@ -131,6 +131,6 @@ return function()
 		--Compact under rework
 	}
 
-	mod.api.registry.blocks:build(mod.MODID .. ":variables.local", block)
+	mod.api.registry:buildBlock(mod.MODID .. ":variables.local", block)
 	return
 end

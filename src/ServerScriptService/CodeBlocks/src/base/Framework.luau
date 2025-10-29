@@ -10,6 +10,9 @@ local clonables = {
   VariableBlock = nil
 }
 
+local ModCentral = require(script.Parent.Parent.Parent:WaitForChild("ModCentral"))
+local Blocks = {}
+
 function this.phraseBlockType (connections:{})
   if connections.CanInsert then
     return "VariableBlock"
@@ -21,7 +24,11 @@ function this.phraseBlockType (connections:{})
 end
 
 function export:render (To:Frame|{}, Index:number, Block:string, WithBlockData:{}?, Floor:number?)
-  return
+  
+end
+
+function export:regretAll()
+  Blocks = ModCentral:GetAllBlocks()
 end
 
 return export
