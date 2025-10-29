@@ -79,6 +79,10 @@ WHILE TRUE (
 -- 256 chars (0.062s)	1008 objects	10²⁴⁰³ universe lifetimes	9ssiv-dscz-uzvjh3s779-dscc8v-QWEROP-0rqm3-nocw9-xyza584302-lkie7-BNMABC-5hgfd-sdxw6s779-dscc8v-PLKJMN-0rqm3-nocw9-xyza584302-lkie7-BNMABC-5hgfd-sdxw6-QWEROP-9ssiv-dsczPLKJMNBVCXZ-0rqm3-nocw9-xyza584302-lkie7-BNMABC-5hgfd-sdxw6-9ssiv-dscz-uzvjh3s779
 --
 -- Note: Longer keys generate exponentially larger RODS arrays, making brute-force attacks computationally impossible with ReMixBase64 integration.
+--       Some RODS[i] may not be used if Data is shorter than RODS size, otherwise it should use all RODS if the Data size is larger than RODS size.
+--       Even that, it's still secure and blazing-fast regardless of Data Size.
+--
+--       PS: Time to Decrypt is an estimation done by os.clock() and may vary based on hardware and implementation specifics.
 -- ===================================================================
 
 local HLS = require(script.Parent:WaitForChild("HashLib")) --HASLIB
