@@ -1,7 +1,8 @@
 --!nocheck
 
 --TAKE A REMINDER--
--- BaseEncrypt 3 (BE3) is NOT ABSOLUTELY SECURE. DO NOT USE IT FOR SENSITIVE DATA!
+-- BaseEncrypt 3 (BE3) is NOT ABSOLUTELY SECURE. DO NOT USE IT FOR SENSITIVE DATA! This is intended just for RealTime Obfuscation and Light Encryption.
+-- Meaning BE3 is faster and smaller than AES (Padded/ing = Bigger Size) with large data, but it is not as secure as AES or other established encryption standards.
 --
 -- This system was designed to ensure blazing-fast, smooth experiences for all ZENITHOS Plugins and In-Game Experiences.
 -- BE3 does not use padding like AES. It maintains the original file size (though Base64 may add minimal padding).
@@ -11,8 +12,8 @@
 --END--
 
 --WHAT BE3 OFFER--
--- Blazing-Fast encryption and decryption suitable for real-time applications. (Benchmark: ~0.5ms per 1KB on average plugin.)
--- Easily customizable parameters for enhanced security. (Depending on your need. This source was provided "AS-IS".)
+-- Blazing-Fast encryption and decryption suitable for real-time applications. (Benchmark: ~0.5s per 1KB on average plugin.)
+-- Easily customizable parameters for enhanced security. (Depending on your need - This source was provided "AS-IS".)
 -- Base64 encoding with a remixable alphabet for added obfuscation.
 -- Lightweight implementation with minimal dependencies.
 --END--
@@ -125,8 +126,6 @@ function enc(AD : {}, Passkey : string, Salt : string, plainkey : string, length
 		end
 	end
 
-	print(table.concat(RODS,"|"))
-
 	for i = 1, #cat do
 		local PK, ST, plk
 
@@ -182,8 +181,6 @@ function dec(AD : string, Passkey : string, Salt : string, plainkey : string, le
 			continue
 		end
 	end
-
-	print(table.concat(RODS,"|"))
 
 	for i = 1, #cat do
 		local PK, ST, plk
@@ -459,6 +456,7 @@ local function Decode(Data : string, B64KEY:string, Passkey : string, Salt : str
 	end
 end
 
+--named as En/Decode for easier reference since it was made based on Base64, then encrypted.
 return {
 	encode = Encode,
 	decode = Decode,
