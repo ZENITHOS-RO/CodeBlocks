@@ -12,7 +12,7 @@
 --END--
 
 --WHAT BE3 OFFER--
--- Blazing-Fast encryption and decryption suitable for real-time applications. (Benchmark: ~0.5s per 1KB on average plugin.)
+-- Blazing-Fast encryption and decryption suitable for real-time applications. (Benchmark: ~0.2s per 5000char on average data.)
 -- Easily customizable parameters for enhanced security. (Depending on your need - This source was provided "AS-IS".)
 -- Base64 encoding with a remixable alphabet for added obfuscation.
 -- Lightweight implementation with minimal dependencies.
@@ -86,10 +86,13 @@ WHILE TRUE (
 --       PS: Time to Decrypt is an estimation done by os.clock() and may vary based on hardware and implementation specifics.
 -- ===================================================================
 
+-- OUR GOLDEN KEY: "Slow secure > Fast broken" -> "(Might be) Slower En/Decryption but Secure is Better than Faster En/Decryption that can be broken instantly."
+-- Let's go!
+
 local HLS = require(script.Parent:WaitForChild("HashLib")) --HASLIB
 local TS = game:GetService("TestService")
 
-function enc(AD : {}, Passkey : string, Salt : string, plainkey : string, length : number) : string
+function enc(AD : {}, Passkey : string, Salt : string, plainkey : string) : string
 	local cat = table.concat(AD, "")
 	local encrypted = ""
 
@@ -126,6 +129,8 @@ function enc(AD : {}, Passkey : string, Salt : string, plainkey : string, length
 		end
 	end
 
+	print(#RODS..":",table.concat(RODS,"|"))
+
 	for i = 1, #cat do
 		local PK, ST, plk
 
@@ -145,8 +150,10 @@ function enc(AD : {}, Passkey : string, Salt : string, plainkey : string, length
 	return encrypted
 end
 
-function dec(AD : string, Passkey : string, Salt : string, plainkey : string, length : number) : string
+function dec(AD : string, Passkey : string, Salt : string, plainkey : string) : string
 	local cat = AD
+	if type(cat) == "table" then cat = table.concat(AD) end
+	
 	local decrypted = ""
 
 	if Passkey == "" then Passkey = "0" end
@@ -279,12 +286,7 @@ local function remixBase64Alphabet(keyHex:{})
 	return table.concat(alphabetList)
 end
 
-local function Encode(Data : string, B64KEY:string, Passkey : string, Salt : string, plainkey : string, len : number, iteration : number?) : string
-	if Data == "" or Data == nil then return "CANNOT-RESOLVE" end
-	if len <= 0 then return "LENGTH-ERROR" end
-	
-	--local alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/"
-	local alphabet = remixBase64Alphabet(HLS.sha256(B64KEY))
+function Base64Encode(alphabet:string, Data:string)
 	local base = {} --BASE 16-64 IN UNICODE
 
 	for i = 0, 63 do
@@ -352,32 +354,10 @@ local function Encode(Data : string, B64KEY:string, Passkey : string, Salt : str
 		index += 2
 	end
 
-	local encrypted = ""
-	if iteration == nil or iteration == 0 then iteration = 1 end
-
-	for i = 1, iteration do
-		if i > 1 then
-			local function j(input:string) return input:split("") end
-			encrypted = enc(j(encrypted), Passkey..tostring(i), Salt..tostring(i), plainkey..tostring(i), len)
-		else
-			encrypted = enc(resault, Passkey..tostring(i), Salt..tostring(i), plainkey..tostring(i), len)
-		end
-	end
-
-	return encrypted
+	return resault
 end
 
-local function Decode(Data : string, B64KEY:string, Passkey : string, Salt : string, plainkey : string, len : number, iteration : number?) : string
-	if Data == "E" or Data == "" or Data == nil then return "CANNOT-RESOLVE" end
-	if len <= 0 then return "LENGTH-ERROR" end
-	if iteration == nil or iteration == 0 then iteration = 1 end
-
-	for i = 1, iteration do
-		Data = dec(Data, Passkey..tostring(i), Salt..tostring(i), plainkey..tostring(i), len)
-	end
-	
-	--local alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/"
-	local alphabet = remixBase64Alphabet(HLS.sha256(B64KEY))
+function Base64Decode(alphabet:string, Data:string)
 	local base = {} --BASE 16-64 IN UNICODE
 
 	for i = 0, 63 do
@@ -431,8 +411,9 @@ local function Decode(Data : string, B64KEY:string, Passkey : string, Salt : str
 			end
 		end
 	end
-
-	local padding = base[Data:sub(1,1)]
+	
+	--if type(Data) == "table" then Data = table.concat(Data) end
+	local padding = base[Data:sub(1,1)] or 1
 	local resault = table.create((#Data-1)/4*3, "   ")
 
 	local index = 1
@@ -443,12 +424,49 @@ local function Decode(Data : string, B64KEY:string, Passkey : string, Salt : str
 		index += 3
 	end
 	
-	for i = 1, #resault do
-		resault[i] = resault[i] or string.char(math.random(32,122))
+	return resault, padding
+end
+
+local function Encode(Data : string, B64KEY:string, Passkey : string, Salt : string, plainkey : string, iteration : number?) : string
+	if Data == "" or Data == nil then return "CANNOT-RESOLVE" end
+	
+	--local alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/"
+	B64KEY = B64KEY or "no_b64key"
+	Data = Base64Encode(remixBase64Alphabet(HLS.sha256(B64KEY)), Data)
+
+	local encrypted = ""
+	if iteration == nil or iteration == 0 then iteration = 1 end
+
+	for i = 1, iteration do
+		if i > 1 then
+			local function j(input:string) return input:split("") end
+			encrypted = enc(j(encrypted), Passkey..tostring(i), Salt..tostring(i), plainkey..tostring(i))
+		else
+			encrypted = enc(Data, Passkey..tostring(i), Salt..tostring(i), plainkey..tostring(i))
+		end
+	end
+
+	return encrypted
+end
+
+local function Decode(Data : string, B64KEY:string, Passkey : string, Salt : string, plainkey : string, iteration : number?) : string
+	if Data == "E" or Data == "" or Data == nil then return "CANNOT-RESOLVE" end
+	if iteration == nil or iteration == 0 then iteration = 1 end
+
+	for i = 1, iteration do
+		Data = dec(Data, Passkey..tostring(i), Salt..tostring(i), plainkey..tostring(i))
+	end
+	
+	--local alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/"
+	B64KEY = B64KEY or "no_b64key"
+	local Data, padding = Base64Decode(remixBase64Alphabet(HLS.sha256(B64KEY)), Data)
+	
+	for i = 1, #Data do
+		Data[i] = Data[i] or string.char(math.random(32,122))
 	end
 	
 	local concatted
-	local caller = pcall(function() concatted = table.concat(resault) end)
+	local caller = pcall(function() concatted = table.concat(Data) end)
 	if caller then
 		return concatted:sub(1, #concatted-padding)
 	else
@@ -460,4 +478,10 @@ end
 return {
 	encode = Encode,
 	decode = Decode,
+	
+	ReMixBase64 = remixBase64Alphabet,
+	cBase64Encode = Base64Encode,
+	cBase64Decode = Base64Decode,
+	
+	HLS = HLS,
 }
