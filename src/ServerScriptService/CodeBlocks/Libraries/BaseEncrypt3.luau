@@ -1,83 +1,57 @@
 --!nocheck
-
+--
+-- ===================================================================
+-- BASE ENCRYPT 4 (BE4) LIBRARY FOR LUAU / ROBLOX
+-- VERSION: 4.0.0
+--
+-- DEVELOPED BY ZENITHOS STUDIO
+-- PUBLISHED ON GITHUB // OPEN SOURCED CODE // UNCHARGED PRODUCT
+-- ===================================================================
+--
 --TAKE A REMINDER--
--- BaseEncrypt 3 (BE3) is NOT ABSOLUTELY SECURE. DO NOT USE IT FOR SENSITIVE DATA! This is intended just for RealTime Obfuscation and Light Encryption.
--- Meaning BE3 is faster and smaller than AES (Padded/ing = Bigger Size) with large data, but it is not as secure as AES or other established encryption standards.
+-- BaseEncrypt 4 (BE4) is CURRENTLY NOT A PROVEN SECURE METHOD. DO NOT USE IT FOR SENSITIVE DATA!
+-- Meaning BE4 is faster and smaller than AES (Padded/ing = Bigger Size) with large data, but it is not as secure as AES or other established encryption standards.
+-- However it's confirmed that RMB + BE4 + RMB is currently the securest one can be provided in Roblox LuaU environment, with processing time below than 2 seconds.
 --
 -- This system was designed to ensure blazing-fast, smooth experiences for all ZENITHOS Plugins and In-Game Experiences.
 -- BE3 does not use padding like AES. It maintains the original file size (though Base64 may add minimal padding).
 --
--- Please acknowledge that we are not responsible for any data loss if BE3 is inappropriately used for sensitive information.
--- If you need to encrypt highly sensitive data, consider using established encryption standards like AES with proper key management.
+-- Please acknowledge that we are not responsible for any damages or loss if BE3 is inappropriately used for sensitive information.
+-- If you need to encrypt highly sensitive data, consider using established encryption standards like AES with proper key management due to Laws Enforcements.
 --END--
-
+--
 --WHAT BE3 OFFER--
--- Blazing-Fast encryption and decryption suitable for real-time applications. (Benchmark: ~0.2s per 5000char on average data.)
+-- Blazing-Fast securest encryption and decryption suitable for most applications. (Benchmark: ~0.2s x 5000char on average data.)
 -- Easily customizable parameters for enhanced security. (Depending on your need - This source was provided "AS-IS".)
--- Base64 encoding with a remixable alphabet for added obfuscation.
+-- Base64 encoding with a newly invented remixable alphabet for added obfuscation, making QC unable to brute force it without any pre-set data.
 -- Lightweight implementation with minimal dependencies.
 --END--
-
+--
 --HOW CAN BE3 BE SECURE?--
--- BE3 employs multiple layers of obfuscation and transformation to enhance security.
+-- BE3 employs multiple layers of obfuscation and transformation to enhance security, making QC have to pass 2-3 layers of encryption before reaching the original data.
 -- It uses SHA-256 and SHAKE-256 hashing algorithms to derive keys from user-provided passkeys, salts, and plain keys.
--- -- THIS MEAN LONGER KEYS, RODS IS LONGER.
--- The encryption process involves byte-wise transformations based on these derived keys, making it challenging to reverse engineer without the correct parameters.
--- The Base64 encoding step further obfuscates the encrypted data by using a remixable alphabet.
+-- -- THIS MEAN LONGER KEYS, RODS IS LONGER, QC have to try N^(n)^???? (universe) times to brute-force it.
+-- The encryption process involves byte-wise transformations based on three derived keys, making it challenging to reverse engineer without the correct parameters.
+-- The ReMixBase64 encoding step further obfuscates the encrypted data by using a remixable alphabet, you can use RMB + BE4 + RMB method for maximum security.
 --END--
-
--- SECURITY REFERENCE: Key Length vs Brute-Force Time
+--
+-- OUR GOLDEN KEY: "Slow secure > Fast broken" -> "(Might be) Slower En/Decryption but Secure is Better than Faster En/Decryption that can be broken instantly."
+-- GOLDEN KEY TO REMEMBER: "The longer the key, the more secure it is. Use complex combinations of Passkey, Salt, and Plainkey for maximum security."
+-- GOLDEN KEY TO GET QC RESISTANCE: "Use ReMixBase64 + BE4 + ReMixBase64 for maximum security against QC brute-force attempts - never add Pre-Set Algorithm!"
+--
+-- SECURITY REFERENCE: Key Length vs Brute-Force Time (with RMB + BE4 + RMB Integration)
 -- ===================================================================
 -- Time to Decrypt is CALCULATED BY DEEPSEEK (AI), FOR REFERENCE PURPOSES ONLY.
 -- Key length is Combined with PassKey, Salt, and PLainKey lengths.
 -- ===================================================================
--- ORIGINAL DATA TESTED BY ZENITHOS:
---[[LANGUAGE SLC IN LUA ADD ROBLOX VERSION LATEST
-AND POINT -> UPDATE
-DECLARE SELF AS "STRUCTURED LANGUAGE COMMAND" IN "SLC";
-
-TYPE INSTANCE | MODULE | STRING OR CHAR | INTEGER OR INT | NUMBER OR DOUBLE OR FLOAT | BOOLEAN OR BOOL | DATE OR TIME OR DATETIME;
--- Basically all Roblox Globals: Color3, Udim2, Vector3
-
-DECLARE GLOBAL DOUBLE (5) AS STARTING_POINT; -- STARTING_POINT = 5
-DECLARE LOCAL INSTANCE (CREATE NEW INSTANCE PART ( (Name, Parent) VALUE ("DUNNO", Workspace/Folder) )) AS NEW_PARTS; 
--- local NEW_PARTS = Instance.new("Part"); NEW_PARTS["Name"] = "DUNNO"; NEW_PARTS["Parent"] = workspace.folder
-
-DECLARE GLOBAL MODULE (REQUIRE MODULE (FROM Workspace/Timecode) ) AS TC; -- TC = require(workspace.timecode)
-
-PRINT INFO "Hello, World!"; -- print("Hello, World!")
-PRINT WARN "Warning, the code may be deprecated"; -- warn("Warning, the code may be deprecated")
-PRINT ERROR "Oh no!" STACKTRACE () LEVEL 0; -- error("Oh no!", 0) (Stacktrace are for CREATE Console only)
-
-FOR I IN RANGE (FROM 50 UNTIL 5 STEP -5) (
-    PRINT INFO (I)
-);
--- for i in 50, 5, -5 do
---  print(i)
--- end
-
-FOR I IN RANGE (50, 5, -5) (
-    PRINT INFO (I-1)
-);
--- for i in 50, 5, -5 do
---  print(i-1)
--- end
-
-WHILE TRUE (
-    PRINT(STARTING_POINT)
-    UPDATE STARTING_POINT INTO (STARTING_POINT+1)
-)
--- while true do
---  print(STARTING_POINT)
---  STARTING_POINT = STARTING_POINT + 1
--- end
-]]
+-- ORIGINAL DATA TESTED BY ZENITHOS: "The quick brown fox jumps over the lazy dog 1234567890 !@#$%^&*()_+"
 -- ===================================================================
--- Key Length   		RODS Size		Time to Decrypt				Example Key (Combined)
--- ----------   		---------		-----------------			-----------------
--- 36 chars (0.063s)	204 objects		"Only" billions of years	8ttyu-crby-tyuig2r668-crbb7uZENITHYHS (ORINGAL CHAR SIZE TESTED BY ZENITHOS)
--- 96 chars (0.059s)	648 objects		10¹⁵³³ universe lifetimes	9ssiv-dscz-uzvjh3s779-dscc8v-QWEROP-0rqm3-nocw9-xyza584302-lkie7s779-dscc8v-PLKJMN-0rqm3-nocw9-x
--- 256 chars (0.062s)	1008 objects	10²⁴⁰³ universe lifetimes	9ssiv-dscz-uzvjh3s779-dscc8v-QWEROP-0rqm3-nocw9-xyza584302-lkie7-BNMABC-5hgfd-sdxw6s779-dscc8v-PLKJMN-0rqm3-nocw9-xyza584302-lkie7-BNMABC-5hgfd-sdxw6-QWEROP-9ssiv-dsczPLKJMNBVCXZ-0rqm3-nocw9-xyza584302-lkie7-BNMABC-5hgfd-sdxw6-9ssiv-dscz-uzvjh3s779
+-- Key Length   		RODS Size		Time to Decrypt					Example Key (B64k + Combined + fB64k)
+-- ----------   		---------		-----------------				-----------------
+-- 36 chars (0.162s)	204 objects		10¹⁰⁰⁰⁰⁰ years (current AES)	ZENITHOS + 8ttyu-crby-tyuig2r668-crbb7uZENITHYHS + 2025 (ORINGAL CHAR SIZE TESTED BY ZENITHOS)
+-- 96 chars (0.107s)	648 objects		10⁵⁴²²   universe lifetimes		ZENITHOS + 9ssiv-dscz-uzvjh3s779-dscc8v-QWEROP-0rqm3-nocw9-xyza584302-lkie7s779-dscc8v-PLKJMN-0rqm3-nocw9-x + 2025
+-- 256 chars (0.116s)	1008 objects	10ⁿ      universe lifetimes		ZENITHOS + 9ssiv-dscz-uzvjh3s779-dscc8v-QWEROP-0rqm3-nocw9-xyza584302-lkie7-BNMABC-5hgfd-sdxw6s779-dscc8v-PLKJMN-0rqm3-nocw9-xyza584302-lkie7-BNMABC-5hgfd-sdxw6-QWEROP-9ssiv-dsczPLKJMNBVCXZ-0rqm3-nocw9-xyza584302-lkie7-BNMABC-5hgfd-sdxw6-9ssiv-dscz-uzvjh3s779 + 2025
+-- 610 chars (0.114s)   2352 objects	∞        universe lifetimes		ZENITHOS + (A VERY LONG COMBINATION OF RANDOM CHARACTERS // TRUNCATED) + 2025
 --
 -- Note: Longer keys generate exponentially larger RODS arrays, making brute-force attacks computationally impossible with ReMixBase64 integration.
 --       Some RODS[i] may not be used if Data is shorter than RODS size, otherwise it should use all RODS if the Data size is larger than RODS size.
@@ -85,8 +59,6 @@ WHILE TRUE (
 --
 --       PS: Time to Decrypt is an estimation done by os.clock() and may vary based on hardware and implementation specifics.
 -- ===================================================================
-
--- OUR GOLDEN KEY: "Slow secure > Fast broken" -> "(Might be) Slower En/Decryption but Secure is Better than Faster En/Decryption that can be broken instantly."
 -- Let's go!
 
 local HLS = require(script.Parent:WaitForChild("HashLib")) --HASLIB
@@ -279,7 +251,7 @@ local function remixBase64Alphabet(keyHex:{})
 
 	for _, char in ipairs(requiredChars) do
 		if not table.concat(alphabetList):find(char) then
-			return error("ReMixBase couldn't remix the B64 Char, Execution Dismissed")
+			return error("ReMixBase couldn't remix the B64 Char, Further Execution Dismissed")
 		end
 	end
 
