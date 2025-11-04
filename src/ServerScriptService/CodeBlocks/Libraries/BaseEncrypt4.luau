@@ -10,7 +10,7 @@
 --
 --TAKE A REMINDER--
 -- BaseEncrypt 4 (BE4) is CURRENTLY NOT A PROVEN SECURE METHOD. DO NOT USE IT FOR SENSITIVE DATA!
--- Meaning BE4 is faster and smaller than AES (Padded/ing = Bigger Size) with large data, but it is not as secure as AES or other established encryption standards.
+-- Meaning BE4 is still fast; and smaller than AES (Padded/ing = Bigger Size) with large data, but it is not as secure as AES or other established encryption standards.
 -- However it's confirmed that RMB + BE4 + RMB is currently the securest one can be provided in Roblox LuaU environment, with processing time below than 2 seconds.
 --
 -- This system was designed to ensure blazing-fast, smooth experiences for all ZENITHOS Plugins and In-Game Experiences.

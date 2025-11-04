@@ -22,7 +22,7 @@ function this.loadAllMods()
         local ModData = require(mod)
         
         for _, modClass in pairs(mod:GetDescendants()) do
-          if modClass.ClassName == "ModuleScript" then
+          if modClass:IsA("ModuleScript") then
 
             require(modClass)()
 
