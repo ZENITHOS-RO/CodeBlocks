@@ -3,16 +3,46 @@ local this = {}
 
 local Mods = {}
 local Blocks = {}
+local Types = {}
+local ClassNames = {}
 
 local registry = {}
+export.regidstry = registry
+
 local tempRecord = {
   blocks = 0
 }
 
-function registry:buildBlock(blockID:string, blockData:{})
+function registry:buildBlock(blockID:string, blockData:{}) -- The Most Common One
   --AUTOMATIC VALIDATION ADDING SOON--
   Blocks[blockID] = blockData
   tempRecord.blocks += 1
+end
+
+function registry:addTypes(blockID:string, blockData:{}) -- The Most Common One
+  --AUTOMATIC VALIDATION ADDING SOON--
+  Blocks[blockID] = blockData
+  tempRecord.blocks += 1
+end
+
+function registry.doModExist(modid:string)
+  if Mods[modid] then
+    return true
+  else
+    return false
+  end
+end
+
+function export.getAllBlocks()
+  return Blocks
+end
+
+function export.getAllTypes()
+  return Types
+end
+
+function export.getAllClassNames()
+  return ClassNames
 end
 
 function this.loadAllMods()
@@ -61,12 +91,5 @@ function export:unload()
   Blocks = nil
 end
 
-function export:GetAllMods() -- Global Data Access
-  return Mods
-end
-
-function export:GetAllBlocks() -- Global Data Access
-  return Blocks
-end
-
+export.libraries = script.Parent:WaitForChild("Libraries")
 return export

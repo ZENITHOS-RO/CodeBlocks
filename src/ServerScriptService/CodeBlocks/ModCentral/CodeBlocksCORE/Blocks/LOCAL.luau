@@ -31,8 +31,8 @@ return function()
 							type = "menu",
 							position = "AUTO",
 							options = function()
-								local list = mod.api.getAllTypes()
-								table.insert(list, mod.api.getAllClassNames())
+								local list = mod.mc.getAllTypes()
+								table.insert(list, mod.mc.getAllClassNames())
 								table.insert(list, "any")
 								return list
 							end,
@@ -111,15 +111,15 @@ return function()
 		compile = function(blockData) -- Compile this Block to LUA
 			local varName = blockData.row[1][6].input or "Var"
 			local selectedClass = blockData.row[1][2].selected or "any"
-			local Value = blockData.row[1][4].selected or nil
+			local Value = blockData.row[1][4].input or nil
 
 			if selectedClass then
-				return 0, { "local " .. varName .. ":" .. selectedClass .. " = " .. mod.api.convertVariable(Value) }
+				return 0, { "local " .. varName .. ":" .. selectedClass .. " = " .. mod.mc.convertVariable(Value) }
 			else
-				return 0, { "local " .. varName .. " = " .. mod.api.convertVariable(Value) }
+				return 0, { "local " .. varName .. " = " .. mod.mc.convertVariable(Value) }
 			end
 			--Can return either one string for one line (then skip line) or {string} as place-each-line.
-			--return StatusCode (0 = 0K), Code (in string or table)
+			--return StatusCode (0 = 0K), Code (in table)
 		end,
 
 		convert = function(lineData) -- Convert LUA to (Code)Block
@@ -131,6 +131,6 @@ return function()
 		--Compact under rework
 	}
 
-	mod.api.registry:buildBlock(mod.MODID .. ":variables.local", block)
+	mod.mc.registry:buildBlock(mod.MODID .. ":variables.local", block)
 	return
 end

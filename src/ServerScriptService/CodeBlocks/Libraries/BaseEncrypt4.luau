@@ -14,21 +14,21 @@
 -- However it's confirmed that RMB + BE4 + RMB is currently the securest one can be provided in Roblox LuaU environment, with processing time below than 2 seconds.
 --
 -- This system was designed to ensure blazing-fast, smooth experiences for all ZENITHOS Plugins and In-Game Experiences.
--- BE3 does not use padding like AES. It maintains the original file size (though Base64 may add minimal padding).
+-- BE4 does not use padding like AES. It maintains the original file size (though Base64 may add minimal padding).
 --
--- Please acknowledge that we are not responsible for any damages or loss if BE3 is inappropriately used for sensitive information.
+-- Please acknowledge that we are not responsible for any damages or loss if BE4 is inappropriately used for sensitive information.
 -- If you need to encrypt highly sensitive data, consider using established encryption standards like AES with proper key management due to Laws Enforcements.
 --END--
 --
---WHAT BE3 OFFER--
+--WHAT BE4 OFFER--
 -- Blazing-Fast securest encryption and decryption suitable for most applications. (Benchmark: ~0.2s x 5000char on average data.)
 -- Easily customizable parameters for enhanced security. (Depending on your need - This source was provided "AS-IS".)
 -- Base64 encoding with a newly invented remixable alphabet for added obfuscation, making QC unable to brute force it without any pre-set data.
 -- Lightweight implementation with minimal dependencies.
 --END--
 --
---HOW CAN BE3 BE SECURE?--
--- BE3 employs multiple layers of obfuscation and transformation to enhance security, making QC have to pass 2-3 layers of encryption before reaching the original data.
+--HOW CAN BE4 BE SECURE?--
+-- BE4 employs multiple layers of obfuscation and transformation to enhance security, making QC have to pass 2-3 layers of encryption before reaching the original data.
 -- It uses SHA-256 and SHAKE-256 hashing algorithms to derive keys from user-provided passkeys, salts, and plain keys.
 -- -- THIS MEAN LONGER KEYS, RODS IS LONGER, QC have to try N^(n)^???? (universe) times to brute-force it.
 -- The encryption process involves byte-wise transformations based on three derived keys, making it challenging to reverse engineer without the correct parameters.
@@ -187,8 +187,8 @@ function dec(AD : string, Passkey : string, Salt : string, plainkey : string) : 
 	return decrypted
 end
 
+local standardAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 local function remixBase64Alphabet(keyHex:{})
-	local standardAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 	local alphabetList = {}
 	for char in standardAlphabet:gmatch(".") do
 		table.insert(alphabetList, char)
@@ -446,14 +446,16 @@ local function Decode(Data : string, B64KEY:string, Passkey : string, Salt : str
 	end
 end
 
---named as En/Decode for easier reference since it was made based on Base64, then encrypted.
+--named as En/Decode for easier reference since it was first made based on Base64, then encrypted.
 return {
 	encode = Encode,
 	decode = Decode,
 	
+	standardB64A = standardAlphabet,
 	ReMixBase64 = remixBase64Alphabet,
 	cBase64Encode = Base64Encode,
 	cBase64Decode = Base64Decode,
 	
 	HLS = HLS,
+	fHLS = script.Parent:WaitForChild("HashLib"),
 }
